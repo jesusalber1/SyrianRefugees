@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Operational Research - Syrian refugees in the EU</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="scripts/chartist.min.css">
+
+    <script src="scripts/chartist.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+  </head>
+  <body>
+    <article>
+      <section id="presentation">
+        <h1>Optimal distribution of Syrian refugees in the EU</h1>
+        <h3>Quy NGUYEN</h3>
+        <h3>Jesús Alberto POLO</h3>
+        <h3>Elkin AGUAS</h3>
+        <h3>Ahmed ABOU DAHER</h3>
+        <h6>Operational Research</h6>
+      </section>
+      <section data-bespoke-state="green" class="light" id="outline">
+        <h2 class="bullet">Outline</h2>
+        <ol>
+          <li><strong>Introduction</strong></li>
+          <li><strong>Problem</strong></li>
+          <li><strong>Objectives</strong></li>
+          <li><strong>Data</strong></li>
+          <li><strong>Problem resolution</strong></li>
+        </ol>
+      </section>
+      <section id="introduction-1">
+        <h2 class="bullet">Introduction</h2>
+        <ul>
+          <li><strong>Syrian Civil War</strong> and <strong>ISIL</strong></li>
+          <li><strong>6.5 million</strong> refugees internally displaced</li>
+          <li><strong>5 million</strong> refugees around the world</li>
+          <li>Settled in <strong>Turkey</strong>, <strong>Lebannon</strong>, <strong>Jordan</strong> and <strong>EU countries</strong></li>
+        </ul>
+
+      </section>
+      <section id="introduction-2">
+        <h2>Introduction</h2>
+        <h3>European inmigration crisis</h3>
+        <iframe src="http://migrantreport.org/map/GP_Global.html" width="100%" height="100%"></iframe>
+        <!--<iframe src="GP_Global.html" width="100%" height="100%"></iframe>-->
+        <h6><small>Source: migrantreport.org</small></h6>
+      </section>
+      <section id="problem">
+        <h2 class="bullet">Problem</h2>
+        <ul>
+          <li><h3><strong>Locate Syrian refugees in an optimal way</strong></h3></li>
+          <li>According to their <strong>occupation</strong></li>
+          <li>Following EU <strong>limitations</strong> per country</li>
+          <li>Withouts harming the <strong>economy</strong> of the country</li>
+          <li>Using <strong>Integer Linear Programming</strong></li>
+        </ul>
+      </section>
+      <section id="data-1">
+        <h2 class="bullet">Data</h2>
+        <h3><strong>Syrian refugees occupations</strong></h3>
+        <figure class="ct-chart-syrian-occupations" data-x-axis="Occupations" data-y-axis="Number of refugees (x1000)">
+          <!-- Chart Syrian occupation -->
+        </figure>
+      </section>
+      <section id="data-2">
+        <h2 class="bullet">Data</h2>
+        <h3><strong>Accepted refugees by country</strong></h3>
+        <figure class="ct-chart-european-demand" data-x-axis="Number of refugees" data-y-axis="Countries">
+          <!-- Chart European demand -->
+        </figure>
+      </section>
+      <section id="resolution" data-bespoke-state="green" class="light">
+        <h2 class="bullet">Resolution of the problem</h2>
+        <ol>
+          <li><strong>Formal approach</strong></li>
+          <li><strong>Coding</strong></li>
+          <li><strong>Analysis of the results</strong></li>
+          <li><strong>Enhancements</strong></li>
+        </ol>
+      </section>
+      <section id="resolution-formal-1">
+        <h2 class="bullet">Formal approach</h2>
+        <ul>
+          <li><h3><strong>Sets</strong></h3></li>
+          <li>
+            <ol>
+              <li>countries</li>
+              <li>occupations</li>
+            </ol>
+          </li>
+
+          <li><h3><strong>Variables</strong></h3></li>
+          <li>\[x[i,j]\]</li>
+          <li><h3><strong>Objective</strong></h3></li>
+          <li>$$max \sum_{i,j} x[i,j]$$</li>
+        </ul>
+      </section>
+      <section id="resolution-formal-2">
+        <h2 class="bullet">Formal approach</h2>
+        <ul>
+          <li><h3><strong>Parameters</strong></h3></li>
+          <li>
+            <ol>
+              <li>$$accepted\_limit[i]$$</li>
+              <li>$$demand[i,j]$$</li>
+              <li>$$supply[j]$$</li>
+              <li>$$priority\_C[i,j]$$</li>
+              <li>$$priority\_O[i,j]$$</li>
+              <li>$$total\_demand[j]$$</li>
+            </ol>
+          </li>
+        </ul>
+      </section>
+      <section id="resolution-formal-3">
+        <h2 class="bullet">Formal approach</h2>
+        <ul>
+          <li><h3><strong>Constraints</strong></h3></li>
+          <li>
+          <ul>
+              <li>$$x[i,j] \geqslant 0$$</li>
+              <li>$$\sum_{j} x[i,j] \leqslant accepted\_limit[i]$$</li>
+              <li>$$x[i,j] \leqslant demand[i,j]$$</li>
+              <li>$$\sum_{i} x[i,j] \leqslant supply[j]$$</li>
+              <li>$$x[i,j] \leqslant priority\_C[i,j]*accepeted\_limit[i]$$</li>
+              <li>$$x[i,j] \leqslant priority\_O[i,j]*total\_demand[j]$$</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section id="resolution-2">
+        <h2>Coding</h2>
+        <h3>Variables</h3>
+<pre><code class="language-javascript">var x{i in COUNTRIES, j in OCCUPATIONS} >= 0 integer;
+/* number of refugees for occupation j in country i*/
+
+maximize syria: sum{i in COUNTRIES, j in OCCUPATIONS} x[i,j];
+/* total occupation allocated to refugees in country i */</code></pre>
+      </section>
+      <section id="resolution-3">
+        <h2>Coding</h2>
+        <h3>Parameters</h3>
+<pre><code class="language-javascript">param demand{i in COUNTRIES, j in OCCUPATIONS};
+/* occupation j demanded in country i*/
+param supply{j in OCCUPATIONS};
+/* occupation j available in Syria and supply to europe */
+param accepted_limit{i in COUNTRIES};
+/* accepted refugees in country i*/
+param priority_C{i in COUNTRIES, j in OCCUPATIONS};
+/* priority of occupation i in country j, calculated for all occupations in one country - row way */
+param priority_O{i in COUNTRIES, j in OCCUPATIONS};
+/* priority of occupation i in country j, calculated for all countries according to one occupation - column way */
+param total_demand{j in OCCUPATIONS};
+/* total demand for one occupation in all countries */</code></pre>
+      </section>
+      <section id="resolution-4">
+        <h2>Coding</h2>
+        <h3>Constraints</h3>
+<pre><code class="language-javascript">s.t. accpeted_constraint{i in COUNTRIES}: sum{j in OCCUPATIONS} x[i,j] <= accepted_limit[i];
+/* number of refugees ACCEPTED in country i according to its politic*/
+s.t. demanded_constraint{i in COUNTRIES, j in OCCUPATIONS}: x[i,j] <= demand[i,j];
+/* number of occupation i DEMANED in country j */
+s.t. supply_constraint{j in OCCUPATIONS}: sum{i in COUNTRIES} x[i,j] <= supply[j];
+/* number of occupation j which Syria able to SUPPLY to euro */
+s.t. proportionC_constraint{i in COUNTRIES, j in OCCUPATIONS}: x[i,j] <= priority_C[i,j]*accepted_limit[i];
+/* proportion of occupations in each country */
+s.t. proportionO_constraint{i in COUNTRIES, j in OCCUPATIONS}: x[i,j] <= priority_O[i,j]*total_demand[j];
+/* proportion of an occupation for all countries  */</code></pre>
+      </section>
+      <section id="resolution-5">
+        <h2 class="bullet">Coding</h2>
+        <ul>
+          <li><h3>Demand by country</h3></li>
+          <li><img src="images/big-table.png" alt="Big table"></li>
+        </ul>
+      </section>
+      <section id="resolution-6">
+        <h2 class="bullet">Coding</h2>
+        <ul>
+          <li><h3>Proportion by occupation</h3></li>
+          <li><img src="images/table-occupation.png" alt="Table occupation"></li>
+        </ul>
+      </section>
+      <section id="resolution-7">
+        <h2 class="bullet">Coding</h2>
+        <ul>
+          <li><h3>Proportion by country</h3></li>
+          <li><img src="images/table-countries.png" alt="Table countries"></li>
+        </ul>
+      </section>
+      <section id="analysis-1">
+        <h2 class="bullet">Analysis</h2>
+        <h3><strong>Solution</strong></h3>
+        <figure class="ct-chart-analysis-1" data-x-axis="Occupations" data-y-axis="Number of refugees">
+          <!-- Chart Syrian occupation -->
+        </figure>
+        <figure class="ct-chart-analysis-2" data-x-axis="Occupations" data-y-axis="Number of refugees">
+          <!-- Chart Syrian occupation -->
+        </figure>
+      </section>
+      <section id="analysis-2">
+        <h2 class="bullet">Analysis</h2>
+        <h3><strong>Total demand</strong></h3>
+        <figure class="ct-chart-analysis-3" data-x-axis="Occupations" data-y-axis="Number of refugees">
+          <!-- Chart Syrian occupation -->
+        </figure>
+        <figure class="ct-chart-analysis-4" data-x-axis="Occupations" data-y-axis="Number of refugees">
+          <!-- Chart Syrian occupation -->
+        </figure>
+      </section>
+      <section id="analysis-3">
+        <h2 class="bullet">Analysis</h2>
+        <h3><strong>Rejected refugees</strong></h3>
+        <figure class="ct-chart-analysis-5" data-x-axis="Countries" data-y-axis="Percentage">
+          <!-- Chart Rejections -->
+        </figure>
+      </section>
+      <section id="analysis-4">
+        <h2 class="bullet">Analysis</h2>
+        <h3><strong>Rejected refugees (x10)</strong></h3>
+        <figure class="ct-chart-analysis-6" data-x-axis="Countries" data-y-axis="Percentage">
+          <!-- Chart Rejections -->
+        </figure>
+      </section>
+      <section data-bespoke-state="green" class="light" id="enhancements">
+        <h2 class="bullet">Enhancements</h2>
+        <ol>
+          <li><strong>Additional objective functions</strong></li>
+          <li><strong>Additional constraints</strong></li>
+          <li><strong>Flexible parameters</strong></li>
+        </ol>
+      </section>
+      <section id="final">
+        <h2>Thank you</h2>
+      </section>
+    </article>
+    <script src="scripts/bespoke.js"></script>
+  </body>
+</html>

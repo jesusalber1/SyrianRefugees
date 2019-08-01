@@ -1,0 +1,11 @@
+
+{
+    "version": 2,
+    "name": "Jesus-Alberto-website",
+    "public": true,
+    "builds": [
+	{ "src": "*.html", "use": "@now/static" }
+    ],
+    "alias": ["refugees.jesusalberto.me"],
+    "routes": []
+}
