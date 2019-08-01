@@ -7,5 +7,9 @@
 	{ "src": "*.html", "use": "@now/static" }
     ],
     "alias": ["refugees.jesusalberto.me"],
-    "routes": []
+    "routes": [
+	{ "src": "/styles.css", "headers": { "cache-control": "s-maxage=31536000,immutable" }, "dest": "/styles.css" },
+	{ "src": "/images/(.*)", "headers": { "cache-control": "s-maxage=31536000,immutable" }, "dest": "/images/$1" },
+	{ "src": "/scripts/(.*)", "headers": { "cache-control": "s-maxage=31536000,immutable" }, "dest": "/scripts/$1" }
+    ]
 }
