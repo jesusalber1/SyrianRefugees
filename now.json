@@ -3,13 +3,7 @@
     "version": 2,
     "name": "Jesus-Alberto-website",
     "public": true,
-    "builds": [
-	{ "src": "*.html", "use": "@now/static" }
-    ],
     "alias": ["refugees.jesusalberto.me"],
-    "routes": [
-	{ "src": "/styles.css", "headers": { "cache-control": "s-maxage=31536000,immutable" }, "dest": "/styles.css" },
-	{ "src": "/images/(.*)", "headers": { "cache-control": "s-maxage=31536000,immutable" }, "dest": "/images/$1" },
-	{ "src": "/scripts/(.*)", "headers": { "cache-control": "s-maxage=31536000,immutable" }, "dest": "/scripts/$1" }
-    ]
+    "builds": [{ "src": "public/**", "use": "@now/static" }],
+    "routes": [{ "src": "/(.*)", "dest": "public/$1" }]
 }
